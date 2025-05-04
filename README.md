@@ -28,6 +28,11 @@
 
 This project uses a lightweight, serverless architecture to automatically process and store BIA scan data:
 
+## 🧭 Architecture Overview (Initial Thoughts)
+
+![Data Flow Diagram](https://sdmntprsouthcentralus.oaiusercontent.com/files/00000000-f6d0-61f7-8ef3-9668e692d13b/raw?...)
+
+
 1. **📥 Upload BIA Scan**: A PDF file is uploaded to an **Amazon S3 bucket**.
 2. **⚙️ Lambda Trigger**: The upload triggers an **AWS Lambda** function (Docker-based for advanced processing).
 3. **🧾 PDF Processing**: The Lambda function uses **Amazon Textract** (or a custom library like `pdfplumber`) to extract text from the PDF.
@@ -47,3 +52,8 @@ This setup is event-driven, cloud-native, and cost-efficient — ideal for perso
    ```bash
    git clone https://github.com/your-username/project-ronald-pump.git
    cd project-ronald-pump
+
+
+
+
+

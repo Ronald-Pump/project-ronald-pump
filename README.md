@@ -32,7 +32,7 @@ This project uses a lightweight, serverless architecture to automatically proces
 
 ## MVP Data/System Architecture
 
-![](/project-ronald-pump/Images/ronald_pump_architecture.png)
+![](/Images/ronald_pump_architecture.png)
 
 
 ## 🧬 BIA Scan Processing Pipeline (Event-Driven)

@@ -30,7 +30,7 @@ This project uses a lightweight, serverless architecture to automatically proces
 
 ## 🧭 Architecture Overview (Initial Thoughts)
 
-![System Architecture Diagram](https://drive.google.com/drive/u/1/folders/1GDSrmqBgGFO2upItKwK_cSGI17iTolar)
+![System Architecture Diagram](/Images/Project Ronald Pump.drawio.png)
 
 
 1. **📥 Upload BIA Scan**: A PDF file is uploaded to an **Amazon S3 bucket**.

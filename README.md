@@ -30,19 +30,68 @@ This project uses a lightweight, serverless architecture to automatically proces
 
 ## 🧭 Architecture Overview (Initial Thoughts)
 
-![System Architecture Diagram](/Images/Project Ronald Pump.drawio.png)
+## MVP Data/System Architecture
+
+![](/project-ronald-pump/Images/ronald_pump_architecture.png)
 
 
-1. **📥 Upload BIA Scan**: A PDF file is uploaded to an **Amazon S3 bucket**.
-2. **⚙️ Lambda Trigger**: The upload triggers an **AWS Lambda** function (Docker-based for advanced processing).
-3. **🧾 PDF Processing**: The Lambda function uses **Amazon Textract** (or a custom library like `pdfplumber`) to extract text from the PDF.
-4. **🧠 AI Parsing**: The raw text is sent to **OpenAI’s ChatGPT API** to convert it into structured data (JSON / tabular format).
-5. **🗃️ NoSQL Storage**: The structured data is stored in **Amazon DynamoDB** as a backup and for flexible access.
-6. **🛠️ Transformation**: Another Lambda (or Glue job) processes the data into a structured format (CSV/SQL-style).
-7. **🧮 Structured Storage**: The processed data is queried and organized using **Amazon Athena** or **Aurora Serverless v2**.
-8. **📤 Export**: Final metrics are pushed to a **Google Sheet** using the Google Sheets API for easy viewing and sharing.
+## 🧬 BIA Scan Processing Pipeline (Event-Driven)
 
-This setup is event-driven, cloud-native, and cost-efficient — ideal for personal or small team use.
+An end-to-end serverless architecture for processing BIA scan PDFs using AWS, dbt, and Google Sheets.
+
+---
+
+### 1. 📥 Upload (Evolt Active Scan)
+A **PDF file** is uploaded to an **Amazon S3 bucket**.
+
+---
+
+### 2. ⚙️ Lambda Trigger
+The upload triggers an **AWS Lambda** function (Docker-based) to process the file.
+
+---
+
+### 3. 🧾 PDF Processing
+The Lambda function uses the Python library **`pdfplumber`** to extract data from the PDF and converts it into a structured **JSON payload**.
+
+---
+
+### 4. 🗃️ Aurora Serverless Storage
+The raw JSON payload is stored in **Amazon Aurora Serverless (PostgreSQL)** — acting as the **Bronze layer** for raw backups and queryable data.
+
+---
+
+### 5. 🔁 Orchestration
+A second **AWS Lambda function** triggers a **containerized dbt run** on **ECS Fargate**, using an image pulled from **Amazon ECR**.
+
+---
+
+### 6. 🛠️ Transformation (dbt + ECS)
+
+The ECS task executes `dbt run`, which:
+
+- Reads from the `raw_data` table in Aurora (Bronze layer)
+- Applies version-controlled **dbt models** to unnest and normalize the JSON
+- Writes cleaned, structured data into new tables (Silver/Gold layers)
+
+✅ **Serverless orchestration** (Lambda + ECS Fargate)  
+✅ **Modular, Git-driven transformation logic** (dbt in GitHub)  
+✅ **Flexible scaling** for complex or long-running jobs
+
+---
+
+### 7. 📤 Export to Google Sheets
+The final transformed metrics are exported to a **Google Sheet** using the **Google Sheets API**, making them easy to share or review.
+
+---
+
+## ✅ Highlights
+
+- Fully **event-driven** (S3-triggered processing)
+- Uses **serverless AWS components**: Lambda, ECS Fargate, Aurora
+- **dbt-powered transformations** for reliable, testable data modeling
+- Minimal cost, ideal for **individuals or small teams**
+
 
 ---
 

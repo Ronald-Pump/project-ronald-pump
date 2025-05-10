@@ -30,7 +30,7 @@ This project uses a lightweight, serverless architecture to automatically proces
 
 ## 🧭 Architecture Overview (Initial Thoughts)
 
-![Data Flow Diagram](https://sdmntprsouthcentralus.oaiusercontent.com/files/00000000-f6d0-61f7-8ef3-9668e692d13b/raw?...)
+![System Architecture Diagram](https://drive.google.com/drive/u/1/folders/1GDSrmqBgGFO2upItKwK_cSGI17iTolar)
 
 
 1. **📥 Upload BIA Scan**: A PDF file is uploaded to an **Amazon S3 bucket**.

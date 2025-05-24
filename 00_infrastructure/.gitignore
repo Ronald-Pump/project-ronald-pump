@@ -1,0 +1,12 @@
+# Ignore .env file
+.env
+
+# Ignore Terraform state files
+*.tfstate
+*.tfstate.backup
+
+# Ignore Terraform lock file (optional, if you don't want to share it)
+.terraform.lock.hcl
+
+# Ignore Terraform working directory
+.terraform/

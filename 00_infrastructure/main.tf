@@ -70,8 +70,8 @@ resource "aws_lambda_function" "bia_extractor" {
   runtime          = "python3.11"
   handler          = "lambda_function.lambda_handler" # Matches the file and function name in your Lambda code
   role             = aws_iam_role.lambda_exec_role.arn
-  filename         = "${path.module}/../01_lambda/lambda_package.zip" # Points to the zip file in the 01_lambda folder
-  source_code_hash = filebase64sha256("${path.module}/../01_lambda/lambda_package.zip") # Ensures Terraform detects changes
+  filename         = "${path.module}/../01_lambda/for_terraform/lambda_package.zip" # Points to the zip file in the 01_lambda folder
+  source_code_hash = filebase64sha256("${path.module}/../01_lambda/for_terraform/lambda_package.zip") # Ensures Terraform detects changes
   timeout          = 60
   memory_size      = 512
 }
